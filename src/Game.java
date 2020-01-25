@@ -4,10 +4,11 @@ public class Game {
     public static void main(String[] args){
         Desk        desk;
 
-        if (args == null){
-            System.out.println("Program arguments required.");
-            return;
-        }
+	/* There are two cases:
+	 * 1) Run with random values on desk and two dimensions of desk. (3 args)
+	 * 2) Run existing desk from file. (1 arg)
+	*/
+
         if (args.length != 3 && args.length != 1){
             System.out.println("Incorrect number of arguments.");
             return;
@@ -18,6 +19,10 @@ public class Game {
                 return;
             }
             try {
+		/* If option run is executed, 
+		 * there are two dimension, which should be
+		 * nonnegative, integers. 
+		*/
                 if (Integer.parseInt(args[1]) < 1 ||
                         Integer.parseInt(args[2]) < 1) {
                     System.out.println("Negative size of desk.");
@@ -30,13 +35,16 @@ public class Game {
         }
         if (args[0].equals("-r"))
         {
+		/* For desk to be generated only reqires 
+		 * two dimensions.
+		*/
             desk = new Desk(Integer.parseInt(args[1]),
                             Integer.parseInt(args[2]));
             desk.initDesk();
         }
         else {
-            InputParser inputParser;
-            int[][]     inputDesk;
+            InputParser inputParser; //Object, which gets filename and parses it to int[][] array
+            int[][]     inputDesk; //Array, which represents first configuration of desk
 
             inputParser = new InputParser(args[0]);
             if ((inputDesk = inputParser.getDeskFromFile()) == null){

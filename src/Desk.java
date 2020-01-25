@@ -4,22 +4,28 @@ import java.util.Random;
 class Desk {
 	private int		M;
 	private int		N;
-	private int[][]	cellsPast;
-	private int[][] cellsFuture;
+	private int[][]		cellsPast;
+	private int[][]		cellsFuture;
 
+	/* Constructor which will be called if 
+	 * option -r is active
+	*/
 	public Desk(int M, int N)
 	{
 		this.M = M;
 		this.N = N;
 	}
-
+	/* If desk was supposed to 
+	 * be initialized from file
+	 * this constructor is reqired.
+	*/
 	public Desk(int[][] cells, int M, int N)
 	{
 		this.M = M;
 		this.N = N;
 		this.cellsPast = cells;
 	}
-
+	/* Randomizing values of desk */
 	public void initDesk(){
 		Random rnd;
 
@@ -31,7 +37,12 @@ class Desk {
 			}
 		}
 	}
-
+	/* realNeibour function returns pair {x,y}.
+	 * If cell has neibour with indexes which are 
+	 * out of bounds of array, it means we should
+	 * search for this cell on the opposite side 
+	 * of desk, which has the shape of a torus.
+	*/
 	private int[] realNeibour(int i, int j){
 		int[]		pair;
 
@@ -51,6 +62,9 @@ class Desk {
 		return pair;
 
 	}
+	/* checkCell counts alive neibours 
+	 * and decide which cell will die or reborn
+	*/
 	public boolean checkCell(int x, int y){
 		int[]	realCoord;
 		int		countAliveNeibour;
@@ -71,7 +85,10 @@ class Desk {
 		else
 			return (countAliveNeibour == 3);
 	}
-
+	/* nextConfigDesk goes through the desk
+	 * and depending on checkCell returning value
+	 * assign value to each cell
+	*/
 	public void		nextConfigDesk(){
 		cellsFuture = new int[M][N];
 		for (int i = 0; i < M; i++){
@@ -85,7 +102,7 @@ class Desk {
 		 }
 		cellsPast = cellsFuture;
 	}
-
+	/* Print current configuration of desk */
 	public void printDesk(){
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
