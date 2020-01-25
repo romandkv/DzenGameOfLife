@@ -14,6 +14,9 @@ public class InputParser {
         this.fileName = fileName;
     }
 
+    /* Parsing of String to int[]
+     * and validating data
+    */
     private int[] getIntFromString(String line){
         int[] content;
 
@@ -28,13 +31,16 @@ public class InputParser {
         }
         return content;
     }
-
+	/* Validating data in file 
+	 * and getting content of file
+	 * in list
+	*/
     private List<String> getContentFromFile() {
-        List<String>    listOfLines;
+        List<String>    listOfLines; //each line of file 
         BufferedReader  buffer;
         String          contentLine;
-        int             lineSize;
-        int             countLines;
+        int             lineSize; //length of line to check if file contains rectangle and final M value
+        int             countLines;//final N
 
         listOfLines = new ArrayList<String>();
         countLines = 0;
@@ -74,6 +80,9 @@ public class InputParser {
         return listOfLines;
     }
 
+    /* Parsing all the lines from list to int[][], which 
+     * was returned by getContentFromFile
+    */
     public int[][] getDeskFromFile(){
         List<String>    listOfLines;
         int[][]         desk;
