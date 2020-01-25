@@ -85,7 +85,9 @@ public class InputParser {
         i = 0;
         for (String str:
              listOfLines) {
-            desk[i] = getIntFromString(str);
+            if ((desk[i] = getIntFromString(str)) == null){
+                return null;
+            }
             i++;
         }
         return desk;

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<project name="Life" default="compile">
+   <target name="compile">
+	   <mkdir dir="bin"/>
+	   <javac destdir="bin" includeantruntime="false">
+		   <src path="src"/>
+	   </javac>
+   </target>
+   <target name="package" depends="compile">
+	   <jar destfile="${ant.project.name}.jar" basedir="bin">
+	   	<manifest>
+			<attribute name="Main-Class" value="Game"/>
+		</manifest>
+	   </jar>
+   </target>
+   <target name="clean">
+	   <delete dir="bin"/>
+	   <delete file="Life.jar"/>
+   </target>
+</project>

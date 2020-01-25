@@ -13,6 +13,10 @@ public class Game {
             return;
         }
         if (args.length == 3){
+            if (!args[0].equals("-r")){
+                System.out.println("Incorrect input.");
+                return;
+            }
             try {
                 if (Integer.parseInt(args[1]) < 1 ||
                         Integer.parseInt(args[2]) < 1) {
@@ -32,9 +36,13 @@ public class Game {
         }
         else {
             InputParser inputParser;
+            int[][]     inputDesk;
 
             inputParser = new InputParser(args[0]);
-            desk = new Desk(inputParser.getDeskFromFile(),
+            if ((inputDesk = inputParser.getDeskFromFile()) == null){
+                return;
+            }
+            desk = new Desk(inputDesk,
                             inputParser.getM(),
                             inputParser.getN());
         }
